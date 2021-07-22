@@ -28,6 +28,10 @@ M.map({
     {'n', '<C-w><C-v>', [[<cmd>wincmd v<CR>]]},
     {'n', '<C-w><C-\\>', [[<cmd>wincmd v<CR>]]},
     {'n', '<C-w><C-x>', [[<cmd>wincmd x<CR>]]},
+    {'n', '<leader>bd', [[<cmd>Bdelete<CR>]]},
+    {'n', '<leader>bD', [[<cmd>Bdelete!<CR>]]},
+    {'n', '<leader>bw', [[<cmd>Bwipeout<CR>]]},
+    {'n', '<leader>bW', [[<cmd>Bwipeout!<CR>]]},
 }, { noremap = true, silent = true })
 
 

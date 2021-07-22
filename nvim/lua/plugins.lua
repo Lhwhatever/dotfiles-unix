@@ -95,6 +95,12 @@ return packer.startup(function(use)
         config = function() require 'telescope-config' end,
     }
 
+    use {
+        'famiu/bufdelete.nvim',
+        event = 'User NvimSpawn',
+        config = function() vim.cmd [[runtime vim/bd.vim]] end
+    }
+
     -- User Assistance
     use {
         'folke/which-key.nvim',
