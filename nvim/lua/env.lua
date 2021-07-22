@@ -1,4 +1,4 @@
-base = {}
+local base = {}
 
 function base.has(key)
     return vim.fn.has(key) == 1
