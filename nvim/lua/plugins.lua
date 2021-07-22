@@ -61,7 +61,7 @@ return packer.startup(function(use)
     -- Completion
     use {
         'windwp/nvim-autopairs',
-        after = 'nvim-treesitter',
+        after = 'nvim-treesitter-textobjects',
         config = function() require 'autopairs' end,
     }
 
@@ -75,7 +75,6 @@ return packer.startup(function(use)
     use {
         'nvim-treesitter/nvim-treesitter',
         event = 'User NvimSpawn',
-        config = function() require 'treesitter' end,
     }
 
     -- Icons
@@ -120,7 +119,14 @@ return packer.startup(function(use)
 
     use {
         'nvim-treesitter/nvim-treesitter-textobjects',
-        after = 'nvim-treesitter'
+        after = 'nvim-treesitter',
+        config = function() require 'treesitter' end,
+    }
+
+    use {
+        'mattn/emmet-vim',
+        ft = {'html', 'css', 'javascript', 'javascriptreact', 'typescriptreact', 'tsx', 'jsx'},
+        config = function() require 'emmet' end
     }
 
     -- VCS
