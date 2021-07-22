@@ -12,4 +12,7 @@ vim.g.sonokai_diagnostic_text_highlight = 1
 vim.g.sonokai_diagnostic_virtual_text = 'colored'
 vim.g.sonokai_better_performance = 1
 
+
 vim.cmd [[colorscheme sonokai]]
+vim.cmd [[hi NormalFloat guibg=NONE]]
+vim.cmd [[hi FloatBorder guifg=White guibg=bg]]
