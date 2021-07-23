@@ -1,4 +1,6 @@
 local icons = require 'nvim-web-devicons'
+local lsp = require 'feline.providers.lsp'
+
 local palette = vim.fn['sonokai#get_palette'](vim.g.sonokai_style)
 
 local function get_palette(key)
@@ -21,11 +23,10 @@ local colors = {
 
 colors.fg0 = colors.lgrey
 colors.fg1 = colors.dcharc
-colors.fg2 = 'fg'
+colors.fg2 = colors.lgrey
 colors.bg  = 'NONE'
 colors.bg0 = colors.dcharc
 colors.bg2 = colors.dgrey
-
 
 local properties = {
     force_inactive = {
@@ -33,7 +34,8 @@ local properties = {
             'packer',
             'dashboard',
             'fugitive',
-            'fugitiveblame'
+            'fugitiveblame',
+            'help',
         },
         buftypes = {'terminal'},
         bufnames = {}
@@ -118,6 +120,33 @@ local group_colors = {
     Terminal = 'blue',
 }
 
+local ffs = {
+    dos = '',
+    unix = '',
+    mac = '',
+}
+
+local diag_constr = {
+    provider = {
+        err = 'errors',
+        warn = 'warnings',
+        hint = 'hints',
+        info = 'info',
+    },
+    condition = {
+        err = 'Error',
+        warn = 'Warning',
+        hint = 'Hint',
+        info = 'Information',
+    },
+    fg = {
+        err = 'red',
+        warn = 'yellow',
+        hint = 'green',
+        info = 'blue',
+    }
+}
+
 local function get_vi_color()
     local group = vi_groups[vim.fn.mode()] or vi_groups['null']
     return group_colors[group]
@@ -125,6 +154,10 @@ end
 
 local function ternary(condition, if_true, if_false)
     if condition then return if_true else return if_false end
+end
+
+local function is_inactive_file()
+    return vim.tbl_contains(properties.force_inactive.filetypes, vim.bo.filetype)
 end
 
 local primary_hl = function() return {
@@ -144,6 +177,7 @@ local primary_inner_hl = function() return {
 
 local secondary_hl = function() return { bg = 'bg2', fg = get_vi_color() } end
 
+local tertiary_hl = { bg = 'bg2', fg = 'fg2' }
 local inactive_hl = { bg = 'bg0', fg = 'fg0' }
 local inactive_within_hl = { bg = 'bg0', fg = 'black' }
 
@@ -152,14 +186,14 @@ local mode_component = {
         return vi_icons[vim.fn.mode()] or vi_icons['null']
     end,
     hl = primary_hl,
-    left_sep = function() return { str = 'left_filled', hl = primary_outer_hl() } end,
+    left_sep = '  ',
     right_sep = function() return { str = 'right_filled', hl = primary_inner_hl() } end,
 }
 
 local function make_git_component(active) return {
     provider = function()
         local gsd = vim.b.gitsigns_status_dict
-        local output = '  ' .. gsd.head .. ' '
+        local output = ' '
         if gsd['added'] and gsd['added'] > 0 then
             output = output .. ' ' .. gsd['added'] .. ' '
         end
@@ -171,12 +205,23 @@ local function make_git_component(active) return {
         end
         return output
     end,
-    hl = ternary(active, secondary_hl, inactive_hl),
+    hl = ternary(active, tertiary_hl, inactive_hl),
     enabled = function() return vim.b.gitsigns_status_dict ~= nil end,
+    left_sep = ternary(
+        active,
+        function() return {
+            str = '  ' .. vim.b.gitsigns_status_dict.head,
+            hl =  secondary_hl()
+        } end,
+        function() return {
+            str = '  ' .. vim.b.gitsigns_status_dict.head,
+            hl = inactive_hl
+        } end
+    ),
     right_sep = ternary(
         active,
         function() return { str = 'right', hl = secondary_hl() } end,
-        { str = 'vertical_bar_thin', hl = inactive_within_hl }
+        { str = 'right', hl = inactive_within_hl }
     )
 } end
 
@@ -199,7 +244,7 @@ local function get_file_hl_inactive() return {
 local function make_directory_component(active)
     return {
         provider = function()
-            if vim.bo.filetype == 'help' then
+            if is_inactive_file() then
                 return ''
             end
 
@@ -215,7 +260,7 @@ local function make_directory_component(active)
         hl = ternary(
             active,
             {fg = 'lgrey', bg = 'bg2'},
-            {fg = 'black', bg = 'bg0'}
+            {fg = 'grey', bg = 'bg0'}
         ),
         left_sep = ternary(
             active,
@@ -238,7 +283,7 @@ local function make_filename_component(active)
             local tags = ' '
             if vim.bo.modified then tags = tags .. '●' end
             if vim.bo.readonly then tags = tags .. '' end
-            return filename .. tags
+            return filename .. tags .. ' '
         end,
         hl = ternary(active, get_file_hl_active, get_file_hl_inactive),
         right_sep = 'right_filled'
@@ -250,44 +295,81 @@ local position_component = {
     provider = 'position',
     hl = primary_hl,
     left_sep = function() return { str = 'left_filled', hl = primary_inner_hl() } end,
-    right_sep = function() return { str = 'right_filled', hl = primary_outer_hl() } end,
+    right_sep = function() return {
+        str = '█  ',
+        hl = { fg = get_vi_color(), bg = 'NONE' }
+    } end,
 }
 
-local metadata_component = {
-    provider = function()
-        local suffix = {'b', 'ki', 'Mi', 'Gi', 'Ti', 'Pi', 'Ei'}
-        local index = 1
-        local fsize = vim.fn.getfsize(vim.fn.expand('%:p'))
-        while fsize > 1024 and index < 7 do
-            fsize = fsize / 1024
-            index = index + 1
-        end
+local function get_fsize()
+    local suffix = {'ki', 'Mi', 'Gi', 'Ti', 'Pi', 'Ei'}
+    local index = 0
+    local fsize = vim.fn.getfsize(vim.fn.expand('%:p'))
+    while fsize > 1024 and index <= #suffix do
+        fsize = fsize / 1024
+        index = index + 1
+    end
+
+    if index == 0 then
+        return fsize .. 'B'
+    else
         return string.format('%.1f', fsize) .. suffix[index]
+    end
+end
+
+local fsize_component = {
+    provider = function() return get_fsize() end,
+    enabled = function()
+        return vim.fn.glob(vim.fn.expand('%:p')) ~= '' and not is_inactive_file()
     end,
-    hl = secondary_hl,
+    hl = tertiary_hl,
+    right_sep = 'block'
+}
+
+local make_ff_component = function(active) return {
+    provider = function() return ffs[vim.bo.ff] end,
+    hl = ternary(active, secondary_hl, inactive_hl),
+    left_sep = 'block',
+    right_sep = 'block',
+} end
+
+local function make_diag_component(type, active) return {
+    provider = 'diagnostic_' .. diag_constr.provider[type],
+    enabled = function() return lsp.diagnostics_exist(diag_constr.condition[type]) end,
+    hl = {
+        fg = ternary(active,diag_constr.fg[type], 'fg0'),
+        bg = ternary(active, 'bg2', 'bg0'),
+    }
+} end
+
+
+local secondary_left = {
+    provider = '',
+    left_sep = {
+        str = 'left_filled',
+        hl = { fg = 'bg2', bg = 'NONE' },
+    }
 }
 
 local inactive_left = {
     provider = '',
     hl = { bg = 'NONE' },
-    right_sep = {
-        str = 'left_filled',
-        hl = { fg = 'bg0' },
-    },
+    right_sep = '  ',
 }
 
 local inactive_right = {
     provider = '',
     hl = { bg = 'NONE' },
     left_sep = {
-        str = 'right_filled',
+        str = 'left_filled',
         hl = { fg = 'bg0' },
     },
 }
 
 
 local InactiveStatusHL = {
-    fg = vim.api.nvim_exec('hi VertSplit', true):match('guifg=(#%x+)') or '#444444',
+    --fg = vim.api.nvim_exec('hi VertSplit', true):match('guifg=(#%x+)') or '#444444',
+    fg = 'bg0',
     bg = vim.api.nvim_exec('hi VertSplit', true):match('guibg=(#%x+)') or 'NONE',
     style = vim.api.nvim_exec('hi VertSplit', true):match('gui=(#[%l,]+)') or ''
 }
@@ -307,6 +389,7 @@ local components = {
             make_git_component(true),
             make_directory_component(true),
             make_filename_component(true),
+            empty_component
         },
         inactive = {
             inactive_left,
@@ -322,10 +405,22 @@ local components = {
     },
     right = {
         active = {
+            secondary_left,
+            make_diag_component('err', true),
+            make_diag_component('warn', true),
+            make_diag_component('hint', true),
+            make_diag_component('info', true),
+            make_ff_component(true),
+            fsize_component,
             position_component
         },
         inactive = {
-            inactive_right
+            inactive_right,
+            make_diag_component('err', false),
+            make_diag_component('warn', false),
+            make_diag_component('hint', false),
+            make_diag_component('info', false),
+            make_ff_component(false),
         },
     },
 }
