@@ -19,6 +19,7 @@ local colors = {
     dgrey  = get_palette('bg3'),
     grey   = get_palette('bg4'),
     lgrey  = get_palette('grey'),
+    xgrey  = get_palette('grey_dim'),
 }
 
 colors.fg0 = colors.lgrey
@@ -35,11 +36,16 @@ local properties = {
             'dashboard',
             'fugitive',
             'fugitiveblame',
-            'help',
         },
         buftypes = {'terminal'},
         bufnames = {}
     }
+}
+
+local short_filetypes = {
+    'help',
+    'gitcommit',
+    'gitrebase'
 }
 
 local vi_groups = {
@@ -157,17 +163,13 @@ local function ternary(condition, if_true, if_false)
 end
 
 local function is_inactive_file()
-    return vim.tbl_contains(properties.force_inactive.filetypes, vim.bo.filetype)
+    return vim.tbl_contains(properties.force_inactive.filetypes, vim.bo.filetype) or vim.tbl_contains(short_filetypes, vim.bo.filetype)
 end
 
 local primary_hl = function() return {
     bg = get_vi_color(),
     fg = 'fg1',
     style = 'bold',
-} end
-
-local primary_outer_hl = function() return {
-    fg = get_vi_color(),
 } end
 
 local primary_inner_hl = function() return {
@@ -260,7 +262,7 @@ local function make_directory_component(active)
         hl = ternary(
             active,
             {fg = 'lgrey', bg = 'bg2'},
-            {fg = 'grey', bg = 'bg0'}
+            {fg = 'xgrey', bg = 'bg0'}
         ),
         left_sep = ternary(
             active,
@@ -294,7 +296,10 @@ end
 local position_component = {
     provider = 'position',
     hl = primary_hl,
-    left_sep = function() return { str = 'left_filled', hl = primary_inner_hl() } end,
+    left_sep = function() return { 
+        str = '█',
+        hl = primary_inner_hl()
+    } end,
     right_sep = function() return {
         str = '█  ',
         hl = { fg = get_vi_color(), bg = 'NONE' }

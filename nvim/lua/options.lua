@@ -38,6 +38,9 @@ vim.g.writebackup = false
 vim.opt.updatetime = 100
 vim.opt.timeoutlen = 600
 
+-- Taller command bar
+vim.opt.cmdheight = 2
+
 -- Python settings
 if vim.env.NVIM_PYTHON ~= nil then
     vim.g.python3_host_prog = vim.env.NVIM_PYTHON
