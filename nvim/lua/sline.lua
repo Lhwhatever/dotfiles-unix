@@ -436,3 +436,5 @@ local to_link = {'StatusLine', 'StatusLineNC', 'StatusLineTerm', 'StatusLineTerm
 for _, group in pairs(to_link) do
     vim.cmd('hi ' .. group .. ' guifg=' .. InactiveStatusHL.fg .. ' guibg=' .. InactiveStatusHL.bg)
 end
+
+vim.opt.showmode = false
