@@ -161,10 +161,30 @@ return packer.startup(function(use)
         config = function() require 'colors' end
     }
 
-    -- Visual
+    -- Editing guides
     use {
         'lukas-reineke/indent-blankline.nvim',
         event = 'User NvimConnect',
         config = function() require 'indent-guide' end
+    }
+
+
+    -- Statusline and bufferline
+    use {
+        'akinsho/nvim-bufferline.lua',
+        after = 'sonokai',
+        config = function() require 'bline' end
+    }
+
+    use {
+        'Famiu/feline.nvim',
+        after = 'sonokai',
+        config = function() require 'sline' end
+    }
+
+    -- Start screen
+    use {
+        'glepnir/dashboard-nvim',
+        config = function() require 'dashboard' end
     }
 end)

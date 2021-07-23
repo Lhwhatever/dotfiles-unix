@@ -19,6 +19,7 @@ M.map({
 M.map({
     {'n', '<F5>', [[<cmd>nohl | normal! <C-l><CR>]]},
     {'n', 'gs', [[s]]},
+    {'v', 'p', [["_dP]]},
     {'n', '<C-h>', [[<cmd>wincmd h<CR>]]},
     {'n', '<C-j>', [[<cmd>wincmd j<CR>]]},
     {'n', '<C-k>', [[<cmd>wincmd k<CR>]]},

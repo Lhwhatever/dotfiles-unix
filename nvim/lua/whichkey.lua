@@ -66,7 +66,13 @@ wk.register({
             R = 'Reset buffer',
             p = 'Preview hunk',
             b = 'Blame',
-        }
+        },
+        s = {
+            name = '+sessions',
+            s = '[Dasboard] Save session',
+            l = '[Dasboard] Load session',
+            d = '[Dasboard] Open dashboard',
+        },
     },
     c = {
         d = '[LSP] Show line diagnostics'
