@@ -36,21 +36,21 @@ require 'nvim-treesitter.configs'.setup {
             set_jumps = true,
             goto_next_start = {
                 [']m'] = '@function.outer',
-                [']b'] = '@block.outer',
+                [']s'] = '@block.outer',
             },
             goto_next_end = {
                 [']M'] = '@function.outer',
-                [']B'] = '@block.outer',
+                [']S'] = '@block.outer',
                 ['],'] = '@parameter.outer',
             },
             goto_prev_start = {
                 ['[m'] = '@function.outer',
-                ['[b'] = '@block.outer',
+                ['[s'] = '@block.outer',
                 ['[,'] = '@parameter.outer',
             },
             goto_prev_end = {
                 ['[M'] = '@function.outer',
-                ['[B'] = '@block.outer',
+                ['[S'] = '@block.outer',
             },
         },
         lsp_interop = {
