@@ -163,7 +163,9 @@ local function ternary(condition, if_true, if_false)
 end
 
 local function is_inactive_file()
-    return vim.tbl_contains(properties.force_inactive.filetypes, vim.bo.filetype) or vim.tbl_contains(short_filetypes, vim.bo.filetype)
+    return vim.tbl_contains(properties.force_inactive.filetypes, vim.bo.filetype)
+        or vim.tbl_contains(short_filetypes, vim.bo.filetype)
+        or vim.tbl_contains(properties.force_inactive.buftypes, vim.bo.buftype)
 end
 
 local primary_hl = function() return {
