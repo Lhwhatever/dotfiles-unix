@@ -15,4 +15,3 @@ vim.g.sonokai_better_performance = 1
 
 vim.cmd [[colorscheme sonokai]]
 vim.cmd [[hi NormalFloat guibg=NONE]]
-vim.cmd [[hi FloatBorder guifg=White guibg=bg]]
