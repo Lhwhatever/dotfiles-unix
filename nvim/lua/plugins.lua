@@ -187,4 +187,11 @@ return packer.startup(function(use)
         'glepnir/dashboard-nvim',
         config = function() require 'dashboard' end
     }
+
+    -- Languages
+    use {
+        'iamcco/markdown-preview.nvim',
+        run = 'cd app && yarn install',
+        ft = 'markdown',
+    }
 end)
