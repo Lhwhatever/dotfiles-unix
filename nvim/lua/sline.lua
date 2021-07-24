@@ -253,7 +253,8 @@ local function make_directory_component(active)
             end
 
             local filename = vim.fn.bufname()
-            filename = vim.fn.pathshorten(vim.fn.fnamemodify(filename, '%:~:%.'))
+            filename = vim.fn.pathshorten(vim.fn.fnamemodify(filename, ':~:.'))
+
             local dirname = vim.fn.fnamemodify(filename, ':h')
             if dirname == '.' then
                 return ''
