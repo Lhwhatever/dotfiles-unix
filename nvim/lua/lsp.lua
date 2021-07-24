@@ -1,6 +1,5 @@
 require 'icons'
 local langs = require 'lang'
-local windows = require 'windows'
 local keymaps = require 'keymaps'
 
 local M = {}
