@@ -49,8 +49,8 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, _, params, cli
     vim.lsp.diagnostic.display(diagnostics, bufnr, client_id, config)
 end
 
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {border = windows.border})
-vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {border = windows.border})
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {border = 'rounded'})
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {border = 'rounded'})
 
 setup_servers()
 

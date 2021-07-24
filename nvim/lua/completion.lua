@@ -6,12 +6,14 @@ require 'compe'.setup {
     autocomplete = true,
     debug = false,
     preselect = 'enable',
-
     source = {
         path = true,
         buffer = true,
         nvim_lsp = true,
         nvim_lua = true,
+    },
+    documentation = {
+        border = 'rounded'
     }
 }
 

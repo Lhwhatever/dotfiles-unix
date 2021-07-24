@@ -55,7 +55,7 @@ require 'nvim-treesitter.configs'.setup {
         },
         lsp_interop = {
             enable = true,
-            border = 'single',
+            border = 'rounded',
             peek_definition_code = {
                 gl = '@function.outer',
                 gL = '@class.outer',
