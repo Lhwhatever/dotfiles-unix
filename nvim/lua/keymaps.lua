@@ -33,7 +33,7 @@ M.map({
     {'n', '<leader>bD', [[<cmd>Bdelete!<CR>]]},
     {'n', '<leader>bw', [[<cmd>Bwipeout<CR>]]},
     {'n', '<leader>bW', [[<cmd>Bwipeout!<CR>]]},
-    {'t', '<Esc><Esc>', [[<C-\\><C-n>]]},
+    {'t', '<Esc><Esc>', [[<C-n>]]},
 }, { noremap = true, silent = true })
 
 
