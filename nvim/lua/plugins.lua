@@ -28,13 +28,13 @@ return packer.startup(function(use)
         disable = is_windows,
         after = 'nvim-lspconfig',
         cmd = {'LspInstall'},
-        config = function() require 'lsp' end,
+        config = function() require 'config.lsp' end,
     }
 
     use {
         'folke/trouble.nvim',
         after = 'nvim-lspconfig',
-        config = function() require 'trouble-config' end,
+        config = function() require 'config.trouble' end,
     }
 
     use {
@@ -62,19 +62,21 @@ return packer.startup(function(use)
     use {
         'windwp/nvim-autopairs',
         after = 'nvim-treesitter-textobjects',
-        config = function() require 'autopairs' end,
+        config = function() require 'config.autopairs' end,
     }
 
     use {
         'hrsh7th/nvim-compe',
         event = 'User NvimConnect',
-        config = function() require 'completion' end,
+        config = function() require 'config.completion' end,
     }
 
     -- Treesitter
     use {
         'nvim-treesitter/nvim-treesitter',
         event = 'User NvimSpawn',
+        branch = '0.5-compat',
+        run = ':TSUpdate',
     }
 
     -- Icons
@@ -92,7 +94,7 @@ return packer.startup(function(use)
             {'nvim-lua/plenary.nvim'}
         },
         after = 'nvim-web-devicons',
-        config = function() require 'telescope-config' end,
+        config = function() require 'config.telescope' end,
     }
 
     use {
@@ -105,7 +107,7 @@ return packer.startup(function(use)
     use {
         'folke/which-key.nvim',
         event = 'User NvimConnect',
-        config = function() require 'whichkey' end,
+        config = function() require 'config.whichkey' end,
     }
 
     -- Editing
@@ -120,19 +122,20 @@ return packer.startup(function(use)
 
     use {
         'machakann/vim-sandwich',
-        config = function() require 'sandwich-config' end,
+        config = function() require 'config.sandwich' end,
     }
 
     use {
         'nvim-treesitter/nvim-treesitter-textobjects',
         after = 'nvim-treesitter',
-        config = function() require 'treesitter' end,
+        config = function() require 'config.treesitter' end,
+        branch = '0.5-compat',
     }
 
     use {
         'mattn/emmet-vim',
         ft = {'html', 'css', 'javascript', 'javascriptreact', 'typescriptreact', 'tsx', 'jsx'},
-        config = function() require 'emmet' end
+        config = function() require 'config.emmet' end
     }
 
     -- VCS
@@ -165,7 +168,7 @@ return packer.startup(function(use)
     use {
         'lukas-reineke/indent-blankline.nvim',
         event = 'User NvimConnect',
-        config = function() require 'indent-guide' end
+        config = function() require 'config.indent-guide' end
     }
 
 
@@ -173,19 +176,19 @@ return packer.startup(function(use)
     use {
         'akinsho/nvim-bufferline.lua',
         after = 'sonokai',
-        config = function() require 'bline' end
+        config = function() require 'config.bline' end
     }
 
     use {
         'Famiu/feline.nvim',
         after = 'sonokai',
-        config = function() require 'sline' end
+        config = function() require 'config.sline' end
     }
 
     -- Start screen
     use {
         'glepnir/dashboard-nvim',
-        config = function() require 'dashboard' end
+        config = function() require 'config.dashboard' end
     }
 
     -- Languages
