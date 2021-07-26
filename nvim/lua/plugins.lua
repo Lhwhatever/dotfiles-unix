@@ -138,6 +138,13 @@ return packer.startup(function(use)
         config = function() require 'config.emmet' end
     }
 
+    -- Snippets
+    use {
+        'L3MON4D3/LuaSnip',
+        after = 'nvim-compe',
+        opt = true
+    }
+
     -- VCS
     use {
         'lewis6991/gitsigns.nvim',
