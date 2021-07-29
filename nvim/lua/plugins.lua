@@ -113,11 +113,6 @@ return packer.startup(function(use)
     -- Editing
     use {
         'b3nj5m1n/kommentary',
-        keys = {
-            {'n', '<Plug>kommentary_motion_default'},
-            {'v', '<Plug>kommentary_visual_default'},
-            {'n', '<Plug>kommentary_line_default'},
-        }
     }
 
     use {
