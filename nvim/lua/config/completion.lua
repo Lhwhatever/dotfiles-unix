@@ -10,7 +10,9 @@ require 'compe'.setup {
         path = true,
         buffer = true,
         nvim_lsp = true,
-        nvim_lua = true,
+        nvim_lua = false,
+        vsnip = false,
+        ultisnips = false,
     },
     documentation = {
         border = 'rounded'
@@ -31,19 +33,19 @@ keymaps.map({
     { 's', '<Tab>', [[v:lua.tab_complete()]] },
     { 'i', '<S-Tab>', [[v:lua.s_tab_complete()]] },
     { 's', '<S-Tab>', [[v:lua.s_tab_complete()]] },
-}, { noremap = true, expr = true, silent = true })
+}, { expr = true, silent = true })
 
 keymaps.map({
     { 'i', '<C-e>', [[luasnip#choice_active() ? '<Plug>luasnip-next-choice' : compe#close('<C-e>')]] },
     { 's', '<C-e>', [[luasnip#choice_active() ? '<Plug>luasnip-next-choice' : compe#close('<C-e>')]] },
-}, { noremap = false, expr = true, silent = true })
+}, { expr = true, silent = true })
 
 
 _G.tab_complete = function()
     if vim.fn.pumvisible() == 1 then
         return keymaps.t "<C-n>"
     elseif require 'luasnip'.expand_or_jumpable() then
-        return keymaps.t [[<cmd>lua require 'luasnip'.jump(1)<CR>]]
+        return keymaps.t [[<Plug>luasnip-expand-or-jump]]
     elseif check_back_space() then
         return keymaps.t "<Tab>"
     else
@@ -55,7 +57,7 @@ _G.s_tab_complete = function()
     if vim.fn.pumvisible() == 1 then
         return keymaps.t "<C-p>"
     elseif require 'luasnip'.jumpable(-1) then
-        return keymaps.t [[<cmd>lua require 'luasnip'.jump(-1)<CR>]]
+        return keymaps.t [[<Plug>luasnip-jump-prev]]
     else
         return keymaps.t "<S-Tab>"
     end

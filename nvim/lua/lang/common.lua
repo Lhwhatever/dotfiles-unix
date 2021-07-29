@@ -28,5 +28,9 @@ M.flags = {
     debounce_text_changes = 150,
 }
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+M.capabilities = capabilities
+
 
 return M
