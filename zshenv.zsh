@@ -5,6 +5,9 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 # Setup neovim virtualenv
 export NVIM_PYTHON="~/neovim/venv/bin/python3"
 
+# Setup debugpy virtualenv
+export DEBUGPY_PYTHON="~/lib/python3/.virtualenvs/debugpy/bin/python3"
+
 # Setup PATH
 export PATH="$PATH:$(yarn global bin):/usr/local/texlive/2021/bin/x86_64-linux:$HOME/.local/bin"
 

@@ -52,7 +52,7 @@ return packer.startup(function(use)
 
     use {
         'kosayoda/nvim-lightbulb',
-        after = 'nvim-lspconfig',
+        requires = 'nvim-lspconfig',
         config = function()
             vim.cmd [[autocmd CursorHold, CursorHoldI * lua require 'nvim-lightbulb'.update_lightbulb()]]
         end,
@@ -144,7 +144,7 @@ return packer.startup(function(use)
     use {
         'lewis6991/gitsigns.nvim',
         event = 'User NvimConnect',
-        requires = {'nvim-lua/plenary.nvim'},
+        requires = 'nvim-lua/plenary.nvim',
         config = function() require 'gitsigns'.setup() end
     }
 
@@ -206,10 +206,29 @@ return packer.startup(function(use)
         config = function() require 'config.vimtex' end,
     }
 
+    -- Debugging
+    use {
+        'rcarriga/nvim-dap-ui',
+        requires = 'mfussenegger/nvim-dap',
+        event = 'User NvimSpawn',
+        config = function() require 'config.debugger' end,
+    }
+
+    use {
+        'mfussenegger/nvim-dap-python',
+        requires = 'mfussenegger/nvim-dap',
+        event = 'User NvimSpawn',
+        config = function()
+            require 'dap-python'.setup(vim.env.DEBUGPY_PYTHON)
+        end,
+    }
+
+
     -- Linting
     use {
         'jose-elias-alvarez/null-ls.nvim',
-        after = {'neovim/nvim-lspconfig', 'nvim-lua/plenary.nvim'},
+        requires = {'neovim/nvim-lspconfig', 'nvim-lua/plenary.nvim'},
+        event = 'User NvimSpawn',
         config = function() require 'config.null' end,
     }
 end)
