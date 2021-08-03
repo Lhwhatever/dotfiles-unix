@@ -205,4 +205,11 @@ return packer.startup(function(use)
         ft = {'tex', 'latex'},
         config = function() require 'config.vimtex' end,
     }
+
+    -- Linting
+    use {
+        'jose-elias-alvarez/null-ls.nvim',
+        after = {'neovim/nvim-lspconfig', 'nvim-lua/plenary.nvim'},
+        config = function() require 'config.null' end,
+    }
 end)

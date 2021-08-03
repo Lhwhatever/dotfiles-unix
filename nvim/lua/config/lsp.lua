@@ -10,7 +10,7 @@ local function setup_servers()
     for _, server in pairs(servers) do
         if langs.servers[server] == nil then
             require 'lspconfig'[server].setup {}
-        else
+        elseif server ~= 'null-ls' then
             require 'lspconfig'[server].setup(langs.servers[server])
         end
     end
