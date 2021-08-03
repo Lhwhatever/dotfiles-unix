@@ -45,3 +45,6 @@ vim.opt.cmdheight = 2
 if vim.env.NVIM_PYTHON ~= nil then
     vim.g.python3_host_prog = vim.env.NVIM_PYTHON
 end
+
+-- LaTeX settings
+vim.g.tex_flavor = 'latex'

@@ -199,4 +199,10 @@ return packer.startup(function(use)
         run = 'cd app && yarn install',
         ft = 'markdown',
     }
+
+    use {
+        'lervag/vimtex',
+        ft = {'tex', 'latex'},
+        config = function() require 'config.vimtex' end,
+    }
 end)
