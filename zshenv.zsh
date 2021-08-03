@@ -6,8 +6,9 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 export NVIM_PYTHON="~/neovim/venv/bin/python3"
 
 # Setup PATH
-export PATH="$PATH:$(yarn global bin)"
+export PATH="$PATH:$(yarn global bin):/usr/local/texlive/2021/bin/x86_64-linux:$HOME/.local/bin"
 
 # Setup EDITOR and VISUAL
 export VISUAL=nvim
 export EDITOR=$VISUAL
+export LC_TIME=iso.UTF-8
