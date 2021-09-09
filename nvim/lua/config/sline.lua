@@ -299,7 +299,7 @@ end
 local position_component = {
     provider = 'position',
     hl = primary_hl,
-    left_sep = function() return { 
+    left_sep = function() return {
         str = '█',
         hl = primary_inner_hl()
     } end,
@@ -391,28 +391,16 @@ end
 local empty_component = {provider = '', hl = InactiveStatusHL}
 
 local components = {
-    left = {
-        active = {
+    active = {
+        {
             mode_component,
             make_git_component(true),
             make_directory_component(true),
             make_filename_component(true),
             empty_component
         },
-        inactive = {
-            inactive_left,
-            make_git_component(false),
-            make_directory_component(false),
-            make_filename_component(false),
-            empty_component,
-        },
-    },
-    mid = {
-        active = {},
-        inactive = {},
-    },
-    right = {
-        active = {
+        {},
+        {
             secondary_left,
             make_diag_component('err', true),
             make_diag_component('warn', true),
@@ -421,16 +409,25 @@ local components = {
             make_ff_component(true),
             fsize_component,
             position_component
+        }
+    },
+    inactive = {
+        {
+            inactive_left,
+            make_git_component(false),
+            make_directory_component(false),
+            make_filename_component(false),
+            empty_component,
         },
-        inactive = {
+        {
             inactive_right,
             make_diag_component('err', false),
             make_diag_component('warn', false),
             make_diag_component('hint', false),
             make_diag_component('info', false),
             make_ff_component(false),
-        },
-    },
+        }
+    }
 }
 
 require 'feline'.setup {
