@@ -156,7 +156,7 @@ return packer.startup(function(use)
     -- Navigation
     use {
         'ggandor/lightspeed.nvim',
-        event = 'User NvimSpawn'
+        event = 'User NvimSpawn',
     }
 
     -- Colorschemes
