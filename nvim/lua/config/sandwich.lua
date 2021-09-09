@@ -1,4 +1,5 @@
 vim.cmd [[runtime macros/sandwich/keymap/surround.vim]]
+vim.cmd [[runtime vim/sandwich.vim]]
 local recipes = vim.g['sandwich#recipes']
 
 local new_recipes = {
