@@ -228,6 +228,7 @@ return packer.startup(function(use)
     use {
         'jose-elias-alvarez/null-ls.nvim',
         requires = {'neovim/nvim-lspconfig', 'nvim-lua/plenary.nvim'},
+        after = 'nvim-lspconfig',
         event = 'User NvimSpawn',
         config = function() require 'config.null' end,
     }
