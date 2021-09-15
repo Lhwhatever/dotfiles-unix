@@ -12,3 +12,11 @@ xmap im <Plug>(textobj-sandwich-literal-query-i)
 xmap am <Plug>(textobj-sandwich-literal-query-a)
 omap im <Plug>(textobj-sandwich-literal-query-i)
 omap am <Plug>(textobj-sandwich-literal-query-a)
+
+" key mappings for visual mode
+xmap <unique> ys <Plug>(operator-sandwich-add)
+omap <unique> sa <Plug>(operator-sandwich-g@)
+
+xmap <unique> ds <Plug>(operator-sandwich-delete)
+xmap <unique> cs <Plug>(operator-sandwich-replace)
+
