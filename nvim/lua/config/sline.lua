@@ -431,7 +431,7 @@ local components = {
 }
 
 require 'feline'.setup {
-    properties = properties,
+    force_inactive = properties.force_inactive,
     components = components,
     colors = colors,
 }
