@@ -227,7 +227,7 @@ return packer.startup(function(use)
     -- Linting
     use {
         'jose-elias-alvarez/null-ls.nvim',
-        requires = {'neovim/nvim-lspconfig', 'nvim-lua/plenary.nvim'},
+        requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"},
         after = {'nvim-lspconfig', 'plenary.nvim'},
         event = 'User NvimSpawn',
         config = function() require 'config.null' end,
