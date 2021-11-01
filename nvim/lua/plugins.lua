@@ -26,7 +26,7 @@ return packer.startup(function(use)
     use {
         'kabouzeid/nvim-lspinstall',
         disable = is_windows,
-        after = 'nvim-lspconfig',
+        after = {'nvim-lspconfig', 'cmp-nvim-lsp'},
         cmd = {'LspInstall'},
         config = function() require 'config.lsp' end,
     }
@@ -66,9 +66,35 @@ return packer.startup(function(use)
     }
 
     use {
-        'hrsh7th/nvim-compe',
+        'hrsh7th/nvim-cmp',
         event = 'User NvimConnect',
-        config = function() require 'config.completion' end,
+    }
+
+    use {
+        'hrsh7th/cmp-nvim-lsp',
+        after = 'nvim-cmp',
+    }
+
+    use {
+        'hrsh7th/cmp-buffer',
+        after = 'nvim-cmp',
+    }
+    use {
+        'hrsh7th/cmp-path',
+        after = 'nvim-cmp',
+    }
+    use {
+        'hrsh7th/cmp-calc',
+        after = 'nvim-cmp',
+    }
+    use {
+        'hrsh7th/cmp-cmdline',
+        after = 'nvim-cmp',
+    }
+
+    use {
+        'hrsh7th/cmp-emoji',
+        after = 'nvim-cmp',
     }
 
     -- Treesitter
@@ -136,7 +162,13 @@ return packer.startup(function(use)
     -- Snippets
     use {
         'L3MON4D3/LuaSnip',
-        after = 'nvim-compe',
+        after = 'nvim-cmp',
+        opt = true
+    }
+
+    use {
+        'saadparwaiz1/cmp_luasnip',
+        after = 'LuaSnip',
         opt = true
     }
 
@@ -225,11 +257,11 @@ return packer.startup(function(use)
 
 
     -- Linting
-    use {
+    --[[ use {
         'jose-elias-alvarez/null-ls.nvim',
         requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"},
         after = {'nvim-lspconfig', 'plenary.nvim'},
         event = 'User NvimSpawn',
         config = function() require 'config.null' end,
-    }
+    } ]]
 end)

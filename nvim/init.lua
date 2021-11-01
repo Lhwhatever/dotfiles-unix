@@ -12,6 +12,7 @@ function _G.startup_call()
 
     if vim.g.env.head == 'NVIM' then
         vim.cmd [[doautocmd User NvimConnect]]
+        require 'config.completion'
         vim.cmd [[doautocmd User NvimColorize]]
         vim.cmd [[colorscheme sonokai]]
     end
