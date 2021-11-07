@@ -16,3 +16,4 @@ export VISUAL=nvim
 export EDITOR=$VISUAL
 export LC_TIME=en_SI.UTF_8
 export LC_ALL=en_SG.UTF_8
+. "$HOME/.cargo/env"
