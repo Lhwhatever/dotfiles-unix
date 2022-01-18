@@ -103,7 +103,6 @@ return packer.startup(function(use)
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		event = "User NvimSpawn",
-		run = ":TSUpdate",
 	})
 
 	-- Icons
