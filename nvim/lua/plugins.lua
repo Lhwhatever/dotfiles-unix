@@ -10,8 +10,6 @@ vim.cmd([[au BufWritePost plugins.lua PackerCompile]])
 
 local packer = require("packer")
 
-local is_windows = vim.g.env.os == "Windows"
-
 return packer.startup(function(use)
 	use({
 		"wbthomason/packer.nvim",
@@ -23,8 +21,7 @@ return packer.startup(function(use)
 	})
 
 	use({
-		"kabouzeid/nvim-lspinstall",
-		disable = is_windows,
+		"williamboman/nvim-lsp-installer",
 		after = { "nvim-lspconfig", "cmp-nvim-lsp" },
 		cmd = { "LspInstall" },
 		config = function()
@@ -238,7 +235,7 @@ return packer.startup(function(use)
 	})
 
 	use({
-		"Famiu/feline.nvim",
+		"feline-nvim/feline.nvim",
 		after = "sonokai",
 		config = function()
 			require("config.sline")

@@ -21,24 +21,16 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 	update_in_insert = true,
 })
 
-local function setup_servers()
-	require("lspinstall").setup()
-	local servers = require("lspinstall").installed_servers()
-	for _, server in pairs(servers) do
-		if langs.servers[server] == nil then
-			require("lspconfig")[server].setup(langs.common)
-		else
-			require("lspconfig")[server].setup(langs.servers[server])
-		end
-	end
-end
+local lsp_installer = require("nvim-lsp-installer")
 
-setup_servers()
+lsp_installer.on_server_ready(function(server)
+    if langs.servers[server.name] == nil then
+        server:setup(langs.common)
+    else
+        server:setup(langs.servers[server.name])
+    end
+end)
 
-require("lspinstall").post_install_hook = function()
-	setup_servers()
-	vim.cmd("bufdo e")
-end
 
 function M.jump_to_preview()
 	if vim.tbl_contains(vim.api.nvim_list_wins(), M.floating_win) then

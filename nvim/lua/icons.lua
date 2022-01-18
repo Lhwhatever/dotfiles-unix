@@ -34,7 +34,7 @@ end
 M.signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
 
 for signtype, sign in pairs(M.signs) do
-  local hl = "LspDiagnosticsSign" .. signtype
+  local hl = "DiagnosticSign" .. signtype
   vim.fn.sign_define(hl, { text = sign, texthl = hl, numhl = "" })
 end
 

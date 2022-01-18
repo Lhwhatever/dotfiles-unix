@@ -140,10 +140,10 @@ local diag_constr = {
 		info = "info",
 	},
 	condition = {
-		err = "Error",
-		warn = "Warning",
-		hint = "Hint",
-		info = "Information",
+		err = vim.diagnostic.severity.ERROR,
+		warn = vim.diagnostic.severity.WARN,
+		hint = vim.diagnostic.severity.HINT,
+		info = vim.diagnostic.severity.INFO,
 	},
 	fg = {
 		err = "red",
@@ -506,7 +506,7 @@ local components = {
 require("feline").setup({
 	force_inactive = properties.force_inactive,
 	components = components,
-	colors = colors,
+    theme = colors,
 })
 
 local to_link = { "StatusLine", "StatusLineNC", "StatusLineTerm", "StatusLineTermNC" }

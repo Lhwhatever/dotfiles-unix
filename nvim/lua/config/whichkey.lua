@@ -7,7 +7,6 @@ wk.register({
         d  = '[LSP] List definitions',
         r  = '[LSP] List references',
         y  = '[LSP] Preview type definition',
-        yy = '[LSP] Jump to type definition',
         k  = '[LSP] Signature help',
         i  = '[LSP] Implementation',
         s = 'Substitute {count} chars',
@@ -59,7 +58,14 @@ wk.register({
             q = 'Command history',
             z = 'Spelling suggestions',
         },
-        x = 'Trouble',
+        x = {
+            name = '+Trouble',
+            x = 'Last search',
+            w = 'Workspace diagnostics',
+            d = 'Document diagnostics',
+            q = 'Quickfix',
+            l = 'Location list',
+        },
         h = {
             name = '+gitsigns',
             s = 'Stage hunk',

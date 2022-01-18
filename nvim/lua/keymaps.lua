@@ -17,7 +17,7 @@ M.map({
 }, { noremap = true, expr = true })
 
 M.map({
-    {'n', '<F5>', [[<cmd>nohl | normal! <C-l><CR>]]},
+    {'n', '<F5>', [[<C-l>]]},
     {'n', 'gs', [[s]]},
     {'v', 'p', [["_dP]]},
     {'n', '<C-h>', [[<cmd>wincmd h<CR>]]},

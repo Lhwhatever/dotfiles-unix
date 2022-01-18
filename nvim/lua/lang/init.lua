@@ -3,22 +3,24 @@ local M = {
 }
 
 local common = require("lang.common")
-M.common = common
-
-local langs = {
-	lua = require("lang.lua"),
-	typescript = require("lang.typescript"),
+M.common = {
+    settings = common
 }
 
-for name, settings in pairs(langs) do
-	if settings.lsp ~= nil then
-		for key, value in pairs(common) do
-			if settings.lsp[key] == nil then
-				settings.lsp[key] = value
-			end
-		end
-		M.servers[name] = settings.lsp
-	end
+local langs = {
+    require("lang.lua"),
+    require("lang.typescript"),
+}
+
+for _, module in ipairs(langs) do
+    if module.lsp ~= nil then
+        for key, value in pairs(common) do
+            if module.lsp[key] == nil then
+                module.lsp[key] = value
+            end
+        end
+        M.servers[module.lsp.key] = module.lsp
+    end
 end
 
 return M

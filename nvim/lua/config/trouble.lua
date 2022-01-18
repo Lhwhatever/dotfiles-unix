@@ -9,5 +9,9 @@ require 'trouble'.setup {
 local keymaps = require 'keymaps'
 
 keymaps.map({
-    {'n', '<leader>x', '<cmd>Trouble<CR>'},
+    {'n', '<leader>xx', '<cmd>TroubleToggle<CR>'},
+    {'n', '<leader>xw', '<cmd>TroubleToggle workspace_diagnostics<CR>'},
+    {'n', '<leader>xd', '<cmd>TroubleToggle document_diagnostics<CR>'},
+    {'n', '<leader>xq', '<cmd>TroubleToggle quickfix<CR>'},
+    {'n', '<leader>xl', '<cmd>TroubleToggle loclist<CR>'},
 }, { noremap = true, silent = true })
