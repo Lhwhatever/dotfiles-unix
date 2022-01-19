@@ -103,6 +103,7 @@ return packer.startup(function(use)
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		event = "User NvimSpawn",
+        commit = '668de0951a36ef17016074f1120b6aacbe6c4515',
 	})
 
 	-- Icons
@@ -158,6 +159,7 @@ return packer.startup(function(use)
 
 	use({
 		"nvim-treesitter/nvim-treesitter-textobjects",
+        commit = "ca4a500c7fb17f770b3b633d7c0fb7fbb8aca6fc",
 		after = "nvim-treesitter",
 		config = function()
 			require("config.treesitter")
