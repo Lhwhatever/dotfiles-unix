@@ -218,7 +218,7 @@ return packer.startup(function(use)
 
 	-- Statusline and bufferline
 	use({
-		"akinsho/nvim-bufferline.lua",
+		"akinsho/bufferline.nvim",
 		after = "sonokai",
 		config = function()
 			require("config.bline")
