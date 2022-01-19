@@ -221,15 +221,15 @@ return packer.startup(function(use)
 	-- Statusline and bufferline
 	use({
 		"akinsho/bufferline.nvim",
-        event = 'ColorScheme',
+        after = 'sonokai',
 		config = function()
 			require("config.bline")
 		end,
 	})
 
 	use({
-		"feline-nvim/feline.nvim",
-        event = 'ColorScheme',
+		"rebelot/heirline.nvim",
+        after = {'sonokai', 'nvim-web-devicons'},
 		config = function()
 			require("config.sline")
 		end,
