@@ -164,14 +164,6 @@ return packer.startup(function(use)
 		end,
 	})
 
-	use({
-		"mattn/emmet-vim",
-		ft = { "html", "css", "javascript", "javascriptreact", "typescriptreact", "tsx", "jsx" },
-		config = function()
-			require("config.emmet")
-		end,
-	})
-
 	-- Snippets
 	use({
 		"L3MON4D3/LuaSnip",
