@@ -31,7 +31,7 @@ function M.setup()
   end
 end
 
-M.signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
+M.signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 
 for signtype, sign in pairs(M.signs) do
   local hl = "DiagnosticSign" .. signtype
