@@ -221,7 +221,7 @@ return packer.startup(function(use)
 	-- Statusline and bufferline
 	use({
 		"akinsho/bufferline.nvim",
-		after = "sonokai",
+        event = 'ColorScheme',
 		config = function()
 			require("config.bline")
 		end,
@@ -229,7 +229,7 @@ return packer.startup(function(use)
 
 	use({
 		"feline-nvim/feline.nvim",
-		after = "sonokai",
+        event = 'ColorScheme',
 		config = function()
 			require("config.sline")
 		end,
