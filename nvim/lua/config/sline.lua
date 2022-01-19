@@ -7,20 +7,7 @@ local function get_palette(key)
 	return palette[key][1]
 end
 
-local colors = {
-	red = get_palette("bg_red"),
-	green = get_palette("bg_green"),
-	blue = get_palette("bg_blue"),
-	purple = get_palette("purple"),
-	orange = get_palette("orange"),
-	yellow = get_palette("yellow"),
-	dcharc = get_palette("bg1"),
-	charc = get_palette("bg2"),
-	dgrey = get_palette("bg3"),
-	grey = get_palette("bg4"),
-	lgrey = get_palette("grey"),
-	xgrey = get_palette("grey_dim"),
-}
+local colors = require("colors").colors
 
 colors.fg0 = colors.lgrey
 colors.fg1 = colors.dcharc
@@ -90,7 +77,7 @@ local vi_icons = {
 	niI = [[ ]],
 	niR = [[﯒ ]],
 	niV = [[麗 ]],
-	v = [[ 麗]],
+	v = [[ 麗 ]],
 	V = [[麗 ]],
 	[""] = [[麗 ]],
 	s = [[ 礪]],
