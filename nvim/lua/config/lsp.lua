@@ -25,6 +25,7 @@ local lsp_installer = require("nvim-lsp-installer")
 
 lsp_installer.on_server_ready(function(server)
     if langs.servers[server.name] == nil then
+        print('a')
         server:setup(langs.common)
     else
         server:setup(langs.servers[server.name])

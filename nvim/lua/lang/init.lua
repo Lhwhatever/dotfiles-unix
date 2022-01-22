@@ -1,10 +1,6 @@
 local M = {
 	servers = {},
-}
-
-local common = require("lang.common")
-M.common = {
-    settings = common
+    common = require("lang.common")
 }
 
 local langs = {
@@ -14,12 +10,13 @@ local langs = {
 
 for _, module in ipairs(langs) do
     if module.lsp ~= nil then
-        for key, value in pairs(common) do
+        for key, value in pairs(M.common) do
             if module.lsp[key] == nil then
                 module.lsp[key] = value
             end
         end
         M.servers[module.lsp.key] = module.lsp
+        M.servers.key = nil
     end
 end
 
