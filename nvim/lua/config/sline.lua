@@ -26,9 +26,8 @@ local tertiary_hl = function(self) return { bg = self.bg_color, fg = colors.fg2 
 local delim_hl = function(self) return { bg = colors.bg, fg = self.bg_color } end
 local middle_hl = { bg = colors.bg }
 
-local Align = {
-    provider = "%=",
-}
+local Align = { provider = "%=" }
+local Space = { provider = ' ' }
 
 local ViMode = {
     static = {
@@ -66,12 +65,13 @@ local ViMode = {
             ["null"] = [[   ]],
         },
     },
-    hl = function(self)
-        return { bg = self.mode_color, fg = colors.fg1, style = 'bold' }
-    end,
-    provider = function(self)
-        return self.vi_icons[self.mode] or self.vi_icons['null']
-    end,
+    hl = primary_hl,
+    provider = function(self) return self.vi_icons[self.mode] or self.vi_icons['null'] end,
+}
+
+local ViModeRightDelim = {
+    provider = delims.hard_r,
+    hl = secondary_hl,
 }
 
 local GitSignsBlock = {
@@ -96,19 +96,15 @@ local GitSignsBlock = {
         condition = function(self) return (self.status_dict.changed or 0) > 0 end,
         provider = function(self) return ' 柳' ..  self.status_dict.changed end,
     },
+    Space,
     {
-        provider = ' ' .. delims.soft_r,
+        provider = delims.soft_r,
         hl = secondary_hl,
     }
 }
 
-local ViModeRightDelim = {
-    provider = delims.hard_r,
-    hl = secondary_hl,
-}
-
 local FileNameBlock = {
-    hl = function(self) return { bg = self.bg_color, force = true } end,
+    hl = secondary_hl,
 }
 
 local FileIcon = {
@@ -117,7 +113,7 @@ local FileIcon = {
         self.icon, self.icon_color = require("nvim-web-devicons").get_icon_color(self.filename, extension, { default = true })
     end,
     provider = function(self)
-        return self.icon and (' ' .. self.icon)
+        return self.icon and (self.icon .. ' ')
     end,
     hl = function(self) return { fg = self.icon_color } end
 }
@@ -131,7 +127,7 @@ local FileName = {
         if self.nameless then return "[No Name]" end
         local filename  = self.filename_modified
         if not conditions.width_percent_below(#filename, 0.25) then filename = vim.fn.pathshorten(filename) end
-        return ' ' .. filename
+        return filename
     end,
     hl = function(self)
         local hl = { fg = self.mode_color, bg = colors.bg2 }
@@ -150,9 +146,6 @@ local FileFlags = {
     },
     {
         provider = function() if (not vim.bo.modifiable) or vim.bo.readonly then return '' end end,
-    },
-    {
-        provider = ' '
     }
 }
 
@@ -165,8 +158,10 @@ local FileNameBlockRightDelim = {
 
 FileNameBlock = utils.insert(
     FileNameBlock,
+    Space,
     FileIcon,
-    FileName
+    FileName,
+    Space
 )
 
 local DiagnosticsBlock = {
