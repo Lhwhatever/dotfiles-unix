@@ -46,4 +46,15 @@ keymaps.map({
 	{ "n", "<CR>", [[<cmd>lua require 'lsp'.jump_to_preview()<CR>]] },
 }, { noremap = true, silent = true })
 
+local lspconfig = require'lspconfig'
+local configs = require'lspconfig/configs'    
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+lspconfig.emmet_ls.setup({
+    -- on_attach = on_attach,
+    capabilities = capabilities,
+    filetypes = { "html", "css", "typescriptreact", "javascriptreact" },
+})
+
 return M

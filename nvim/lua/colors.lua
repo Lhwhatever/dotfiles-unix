@@ -18,7 +18,8 @@ vim.cmd [[  autocmd ColorScheme NormalFloat guibg=NONE]]
 vim.cmd [[  autocmd ColorScheme * lua require 'lightspeed'.init_highlight()]]
 vim.cmd [[augroup end]]
 
-local palette = vim.fn["sonokai#get_palette"](vim.g.sonokai_style)
+local configuration = vim.fn['sonokai#get_configuration']()
+local palette = vim.fn["sonokai#get_palette"](vim.g.sonokai_style, configuration.colors_override)
 
 local function get_palette(key)
 	return palette[key][1]
