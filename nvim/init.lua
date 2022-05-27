@@ -5,19 +5,20 @@ vim.g.maplocalleader = "\\"
 
 require("plugins")
 
-function _G.startup_call()
-	if vim.g.env.head ~= "VSCODE" then
-		vim.cmd([[doautocmd User NvimSpawn]])
-	end
+vim.api.nvim_create_autocmd('VimEnter', {
+    pattern = '*',
+    callback = function ()
+        if vim.g.env.head ~= "VSCODE" then
+            vim.api.nvim_exec_autocmds('User', { pattern = 'NvimSpawn' })
+        end
 
-	if vim.g.env.head == "NVIM" then
-		vim.cmd([[doautocmd User NvimConnect]])
-		require("config.completion")
-		vim.cmd([[doautocmd User NvimColorize]])
-		vim.cmd([[colorscheme sonokai]])
-	end
-end
-
-vim.cmd([[au VimEnter * call v:lua.startup_call()]])
+        if vim.g.env.head == "NVIM" then
+            vim.api.nvim_exec_autocmds('User', { pattern = 'NvimConnect' })
+            require("config.completion")
+            vim.api.nvim_exec_autocmds('User', { pattern = 'NvimColorize' })
+            vim.cmd([[colorscheme sonokai]])
+        end
+    end
+})
 
 require("options")

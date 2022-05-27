@@ -36,7 +36,7 @@ function M.jump_to_preview()
 	if vim.tbl_contains(vim.api.nvim_list_wins(), M.floating_win) then
 		vim.cmd([[normal! m`]])
 		vim.fn.setpos(".", { M.dest.buf, M.dest.line + 1, M.dest.character + 1 })
-		vim.cmd([[doautocmd CursorMoved]])
+        vim.api.nvim.exec_autocmds('CursorMoved')
 	else
 		vim.cmd([[normal! <CR>]])
 	end

@@ -22,13 +22,16 @@ vim.opt.foldlevel = 3
 
 -- Line numbers
 vim.opt.number = true
-vim.cmd [[
-    augroup relativenumber
-        autocmd!
-        autocmd BufEnter,FocusGained,InsertLeave * setl relativenumber
-        autocmd BufLeave,FocusLost,InsertEnter   * setl norelativenumber
-    augroup END
-]]
+
+local augroup_id = vim.api.nvim_create_augroup('relativenumber', {})
+vim.api.nvim_create_autocmd(
+    { 'BufEnter', 'FocusGained', 'InsertLeave' },
+    { group = augroup_id, command = 'setl relativenumber' }
+)
+vim.api.nvim_create_autocmd(
+    { 'BufLeave', 'FocusLost', 'InsertEnter' },
+    { group = augroup_id, command = 'setl norelativenumber' }
+)
 
 -- No backups
 vim.g.backup = false

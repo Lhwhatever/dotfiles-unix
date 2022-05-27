@@ -24,7 +24,11 @@ M.lsp = {
         vim.keymap.set('n', '<leader>rf', '<cmd>TSLspRenameFile<CR>', opts)
 
         vim.cmd([[ command! -buffer FormattingSync lua vim.lsp.buf.formatting_sync() ]])
-        vim.cmd([[ autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync() ]])
+
+        vim.api.nvim_create_autocmd('BufWritePre', {
+            buffer = 0,
+            callback = vim.lsp.buf.formatting_sync
+        })
     end,
 }
 
