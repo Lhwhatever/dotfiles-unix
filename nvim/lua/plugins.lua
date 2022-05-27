@@ -125,9 +125,6 @@ return packer.startup(function(use)
 			{ "nvim-lua/plenary.nvim" },
 		},
 		after = "nvim-web-devicons",
-		config = function()
-			require("config.telescope")
-		end,
 	})
 
 	use({
@@ -137,6 +134,14 @@ return packer.startup(function(use)
 			vim.cmd([[runtime vim/bd.vim]])
 		end,
 	})
+
+    use({
+        'nvim-telescope/telescope-file-browser.nvim',
+        after = 'telescope.nvim',
+		config = function()
+			require("config.telescope")
+		end,
+    })
 
 	-- User Assistance
 	use({

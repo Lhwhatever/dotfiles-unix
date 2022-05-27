@@ -25,3 +25,6 @@ vim.keymap.set('n', '<leader>f/', '<cmd>Telescope search_history<CR>', opts)
 vim.keymap.set('n', '<leader>fq', '<cmd>Telescope command_history<CR>', opts)
 vim.keymap.set('n', '<leader>fz', '<cmd>Telescope spell_suggest<CR>', opts)
 
+require "telescope".load_extension "file_browser"
+
+vim.keymap.set('n', '<M-p>', '<cmd>Telescope file_browser<CR>', opts)
