@@ -14,4 +14,4 @@ require 'bufferline'.setup {
 keymaps.map({
     {'n', '[b', '<cmd>BufferLineCyclePrev<CR>'},
     {'n', ']b', '<cmd>BufferLineCycleNext<CR>'},
-}, { noremap = true, silent = true })
+}, { silent = true })

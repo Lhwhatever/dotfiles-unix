@@ -227,7 +227,9 @@ return packer.startup(function(use)
 	-- Statusline and bufferline
 	use({
 		"akinsho/bufferline.nvim",
+        tag = 'v2.*',
         after = 'sonokai',
+        requires = 'kyazdan142/nvim-web-devicons',
 		config = function()
 			require("config.bline")
 		end,
