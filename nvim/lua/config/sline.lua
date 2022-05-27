@@ -20,7 +20,7 @@ local delims = {
     soft_l = '',
 }
 
-local primary_hl = function(self) return { bg = self.mode_color, fg = colors.fg1, style = 'bold' } end
+local primary_hl = function(self) return { bg = self.mode_color, fg = colors.fg1, bold = true } end
 local secondary_hl = function(self) return { bg = self.bg_color, fg = self.mode_color } end
 local tertiary_hl = function(self) return { bg = self.bg_color, fg = colors.fg2 } end
 local delim_hl = function(self) return { bg = colors.bg, fg = self.bg_color } end
