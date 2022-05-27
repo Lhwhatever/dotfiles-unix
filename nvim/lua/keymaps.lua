@@ -7,14 +7,14 @@ end
 M.map = function(maps, default_opts)
     for _, map in ipairs(maps) do
         local opts = map[4] or default_opts
-        vim.api.nvim_set_keymap(map[1], map[2], map[3], opts)
+        vim.keymap.set(map[1], map[2], map[3], opts)
     end
 end
 
 M.map({
     {'n', 'j', [[v:count ? 'j' : 'gj']]},
     {'n', 'k', [[v:count ? 'k' : 'gk']]},
-}, { noremap = true, expr = true })
+}, { expr = true })
 
 M.map({
     {'n', '<F5>', [[<C-l>]]},
@@ -34,7 +34,7 @@ M.map({
     {'n', '<leader>bw', [[<cmd>Bwipeout<CR>]]},
     {'n', '<leader>bW', [[<cmd>Bwipeout!<CR>]]},
     {'t', '<Esc><Esc>', [[<C-n>]]},
-}, { noremap = true, silent = true })
+}, { silent = true })
 
 
 return M

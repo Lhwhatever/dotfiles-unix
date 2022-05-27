@@ -37,5 +37,5 @@ wk.register(maps, {
     buffer = 0,
 })
 
-vim.api.nvim_buf_set_keymap(0, 'n', 'gh', '<cmd>WhichKey<CR>', { noremap = true, silent = true })
-vim.api.nvim_buf_set_keymap(0, 'n', 'g?', '<cmd>WhichKey<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', 'gh', '<cmd>WhichKey<CR>', { silent = true, buffer = 0 })
+vim.keymap.set('n', 'g?', '<cmd>WhichKey<CR>', { silent = true, buffer = 0 })

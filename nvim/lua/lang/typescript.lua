@@ -18,10 +18,10 @@ M.lsp = {
             require_confirmation_on_move = true,
         })
 
-        local opts = { noremap = true, silent = true }
+        local opts = { silent = true, buffer = bufnr }
 
-        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<A-o>', '<cmd>TSLspOrganize<CR>', opts)
-        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rf', '<cmd>TSLspRenameFile<CR>', opts)
+        vim.keymap.set('n', '<A-o>', '<cmd>TSLspOrganize<CR>', opts)
+        vim.keymap.set('n', '<leader>rf', '<cmd>TSLspRenameFile<CR>', opts)
 
         vim.cmd([[ command! -buffer FormattingSync lua vim.lsp.buf.formatting_sync() ]])
         vim.cmd([[ autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync() ]])
