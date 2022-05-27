@@ -12,14 +12,14 @@ vim.g.sonokai_diagnostic_text_highlight = 1
 vim.g.sonokai_diagnostic_virtual_text = 'colored'
 vim.g.sonokai_better_performance = 1
 
-local augroup_id = vim.api.nvim_create_augroup('OnColorscheme')
+local augroup_id = vim.api.nvim_create_augroup('OnColorscheme', {})
 vim.api.nvim_create_autocmd('ColorScheme', {
     group = augroup_id,
     pattern = 'NormalFloat',
     command = 'highlight NormalFloat guibg=NONE',
 })
 vim.api.nvim_create_autocmd('ColorScheme', {
-    augroup = augroup_id,
+    group = augroup_id,
     callback = function () require 'lightspeed'.init_highlight() end
 })
 
