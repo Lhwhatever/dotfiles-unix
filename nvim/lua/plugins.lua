@@ -135,13 +135,14 @@ return packer.startup(function(use)
 		end,
 	})
 
-    use({
-        'nvim-telescope/telescope-file-browser.nvim',
-        after = 'telescope.nvim',
+	use({
+		"nvim-telescope/telescope-file-browser.nvim",
+		after = "telescope.nvim",
 		config = function()
-			require("config.telescope")
+			require("telescope").load_extension("file_browser")
+			vim.keymap.set("n", "<M-p>", "<cmd>Telescope file_browser<CR>", { silent = true })
 		end,
-    })
+	})
 
 	-- User Assistance
 	use({
