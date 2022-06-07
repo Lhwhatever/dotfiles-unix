@@ -237,17 +237,9 @@ return packer.startup(function(use)
 
 	use({
 		"rebelot/heirline.nvim",
-        after = {'sonokai', 'nvim-web-devicons'},
+		after = { "sonokai", "nvim-web-devicons" },
 		config = function()
 			require("config.sline")
-		end,
-	})
-
-	-- Start screen
-	use({
-		"glepnir/dashboard-nvim",
-		config = function()
-			require("config.dashboard")
 		end,
 	})
 
