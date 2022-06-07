@@ -1,4 +1,4 @@
-local wk = require 'which-key'
+--[[ local wk = require 'which-key'
 
 local maps = {
     q = '[Trouble] Close',
@@ -38,4 +38,4 @@ wk.register(maps, {
 })
 
 vim.keymap.set('n', 'gh', '<cmd>WhichKey<CR>', { silent = true, buffer = 0 })
-vim.keymap.set('n', 'g?', '<cmd>WhichKey<CR>', { silent = true, buffer = 0 })
+vim.keymap.set('n', 'g?', '<cmd>WhichKey<CR>', { silent = true, buffer = 0 }) ]]

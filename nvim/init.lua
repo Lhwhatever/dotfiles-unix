@@ -1,23 +1,23 @@
-require("env").checkenv()
+require('env').checkenv()
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+vim.g.mapleader = ' '
+vim.g.maplocalleader = '\\'
 
-require("plugins")
+require('plugins')
 
-vim.api.nvim_create_autocmd("VimEnter", {
-	group = vim.api.nvim_create_augroup("VimInit", {}),
+vim.api.nvim_create_autocmd('VimEnter', {
+	group = vim.api.nvim_create_augroup('VimInit', {}),
 	callback = function()
-		if vim.g.env.head ~= "VSCODE" then
-			vim.api.nvim_exec_autocmds("User", { pattern = "NvimSpawn" })
+		if vim.g.env.head ~= 'VSCODE' then
+			vim.api.nvim_exec_autocmds('User', { pattern = 'NvimSpawn' })
 		end
 
-		if vim.g.env.head == "NVIM" then
-			vim.api.nvim_exec_autocmds("User", { pattern = "NvimConnect" })
-			require("config.completion")
-			vim.api.nvim_exec_autocmds("User", { pattern = "Colorize" })
+		if vim.g.env.head == 'NVIM' then
+			vim.api.nvim_exec_autocmds('User', { pattern = 'NvimConnect' })
+			require('config.completion')
+			vim.api.nvim_exec_autocmds('User', { pattern = 'Colorize' })
 		end
 	end,
 })
 
-require("options")
+require('options')

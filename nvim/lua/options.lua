@@ -25,12 +25,12 @@ vim.opt.number = true
 
 local augroup_id = vim.api.nvim_create_augroup('relativenumber', {})
 vim.api.nvim_create_autocmd(
-    { 'BufEnter', 'FocusGained', 'InsertLeave' },
-    { group = augroup_id, command = 'setl relativenumber' }
+	{ 'BufEnter', 'FocusGained', 'InsertLeave' },
+	{ group = augroup_id, command = 'setl relativenumber' }
 )
 vim.api.nvim_create_autocmd(
-    { 'BufLeave', 'FocusLost', 'InsertEnter' },
-    { group = augroup_id, command = 'setl norelativenumber' }
+	{ 'BufLeave', 'FocusLost', 'InsertEnter' },
+	{ group = augroup_id, command = 'setl norelativenumber' }
 )
 
 -- No backups
@@ -46,7 +46,7 @@ vim.opt.cmdheight = 2
 
 -- Python settings
 if vim.env.NVIM_PYTHON ~= nil then
-    vim.g.python3_host_prog = vim.env.NVIM_PYTHON
+	vim.g.python3_host_prog = vim.env.NVIM_PYTHON
 end
 
 -- LaTeX settings

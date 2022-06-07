@@ -1,1 +1,1 @@
-vim.g.indent_blankline_filetype_exclude = {'help', 'dashboard'}
+vim.g.indent_blankline_filetype_exclude = { 'help', 'dashboard' }
