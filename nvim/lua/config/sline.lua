@@ -131,13 +131,13 @@ local FileName = {
     end,
     hl = function(self)
         local hl = { fg = self.mode_color, bg = colors.bg2 }
-        if self.nameless then hl.style = 'italic' end
+        if self.nameless then hl.italic = true end
         return hl
     end
 }
 
 local FileNameModifier = {
-    hl = function() if vim.bo.modified then return { fg = colors.orange, style = 'bold', force = true } end end,
+    hl = function() if vim.bo.modified then return { fg = colors.orange, bold = true, force = true } end end,
 }
 
 local FileFlags = {
