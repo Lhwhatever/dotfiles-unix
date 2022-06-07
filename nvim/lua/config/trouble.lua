@@ -5,6 +5,7 @@ require('trouble').setup({
 		previous = { '[q', '<S-Tab>', 'k' },
 		['next'] = { ']q', '<Tab>', 'j' },
 	},
+	auto_jump = {},
 })
 local keymaps = require('keymaps')
 
