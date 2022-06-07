@@ -1,29 +1,29 @@
-local base = require 'env'
+local base = require("env")
 
-if base.has('termguicolors') then
-    vim.opt.termguicolors = true
+if base.has("termguicolors") then
+	vim.opt.termguicolors = true
 end
 
-vim.g.sonokai_style = 'atlantis'
+vim.g.sonokai_style = "atlantis"
 vim.g.sonokai_enable_italic = 1
 vim.g.sonokai_disable_italic_comment = 1
 vim.g.sonokai_transparent_background = 1
 vim.g.sonokai_diagnostic_text_highlight = 1
-vim.g.sonokai_diagnostic_virtual_text = 'colored'
+vim.g.sonokai_diagnostic_virtual_text = "colored"
 vim.g.sonokai_better_performance = 1
 
-local augroup_id = vim.api.nvim_create_augroup('OnColorscheme', {})
-vim.api.nvim_create_autocmd('ColorScheme', {
-    group = augroup_id,
-    pattern = 'NormalFloat',
-    command = 'highlight NormalFloat guibg=NONE',
-})
-vim.api.nvim_create_autocmd('ColorScheme', {
-    group = augroup_id,
-    callback = function () require 'lightspeed'.init_highlight() end
+local init = function()
+	vim.cmd([[highlight NormalFloat guibg=NONE]])
+	vim.cmd([[highlight FloatBorder guibg=NONE]])
+	require("lightspeed").init_highlight()
+end
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+	group = vim.api.nvim_create_augroup("OnColorscheme", {}),
+	callback = init,
 })
 
-local configuration = vim.fn['sonokai#get_configuration']()
+local configuration = vim.fn["sonokai#get_configuration"]()
 local palette = vim.fn["sonokai#get_palette"](vim.g.sonokai_style, configuration.colors_override)
 
 local function get_palette(key)
@@ -46,5 +46,7 @@ _M.colors = {
 	lgrey = get_palette("grey"),
 	xgrey = get_palette("grey_dim"),
 }
+
+init()
 
 return _M
