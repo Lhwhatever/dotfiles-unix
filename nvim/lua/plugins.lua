@@ -19,14 +19,18 @@ return packer.startup(function(use)
 	})
 
 	-- LSP
+	use({ 'neovim/nvim-lspconfig' })
+
 	use({
-		'neovim/nvim-lspconfig',
+		'williamboman/mason.nvim',
+		config = function()
+			require('mason').setup()
+		end,
 	})
 
 	use({
-		'williamboman/nvim-lsp-installer',
-		after = { 'nvim-lspconfig', 'cmp-nvim-lsp' },
-		cmd = { 'LspInstall' },
+		'williamboman/mason-lspconfig.nvim',
+		after = { 'nvim-lspconfig', 'mason.nvim', 'cmp-nvim-lsp' },
 		config = function()
 			require('config.lsp')
 		end,
@@ -78,7 +82,7 @@ return packer.startup(function(use)
 	-- Completion
 	use({
 		'windwp/nvim-autopairs',
-		after = 'nvim-treesitter-textobjects',
+		after = 'nvim-treesitter',
 		config = function()
 			require('config.autopairs')
 		end,
@@ -86,40 +90,21 @@ return packer.startup(function(use)
 
 	use({
 		'hrsh7th/nvim-cmp',
-		event = 'User NvimConnect',
-	})
-
-	use({
 		'hrsh7th/cmp-nvim-lsp',
-		after = 'nvim-cmp',
-	})
-
-	use({
 		'hrsh7th/cmp-buffer',
-		after = 'nvim-cmp',
-	})
-	use({
 		'hrsh7th/cmp-path',
-		after = 'nvim-cmp',
-	})
-	use({
 		'hrsh7th/cmp-calc',
-		after = 'nvim-cmp',
-	})
-	use({
 		'hrsh7th/cmp-cmdline',
-		after = 'nvim-cmp',
-	})
-
-	use({
 		'hrsh7th/cmp-emoji',
-		after = 'nvim-cmp',
+		after = 'LuaSnip',
 	})
 
 	-- Treesitter
 	use({
 		'nvim-treesitter/nvim-treesitter',
-		event = 'User NvimSpawn',
+		config = function()
+			require('config.treesitter')
+		end,
 	})
 
 	-- Icons
@@ -191,25 +176,11 @@ return packer.startup(function(use)
 		end,
 	})
 
-	use({
-		'nvim-treesitter/nvim-treesitter-textobjects',
-		after = 'nvim-treesitter',
-		config = function()
-			require('config.treesitter')
-		end,
-	})
-
 	-- Snippets
 	use({
 		'L3MON4D3/LuaSnip',
-		after = 'nvim-cmp',
-		opt = true,
-	})
-
-	use({
 		'saadparwaiz1/cmp_luasnip',
-		after = 'LuaSnip',
-		opt = true,
+		after = 'nvim-cmp',
 	})
 
 	-- VCS
@@ -266,7 +237,7 @@ return packer.startup(function(use)
 
 	use({
 		'rebelot/heirline.nvim',
-		after = { 'sonokai', 'nvim-web-devicons' },
+		after = { 'sonokai', 'nvim-web-devicons', 'nvim-lspconfig' },
 		config = function()
 			require('config.sline')
 		end,
@@ -288,8 +259,8 @@ return packer.startup(function(use)
 	})
 
 	use({
-		'jose-elias-alvarez/nvim-lsp-ts-utils',
-		ft = { 'javascript', 'typescript', 'jsx', 'tsx', 'javascriptreact', 'typescriptreact' },
+		'jose-elias-alvarez/typescript.nvim',
+		after = 'nvim-lspconfig',
 	})
 
 	-- Debugging
@@ -315,6 +286,7 @@ return packer.startup(function(use)
 	use({
 		'jose-elias-alvarez/null-ls.nvim',
 		event = 'User NvimConnect',
+		after = 'mason.nvim',
 		config = function()
 			require('config.null')
 		end,

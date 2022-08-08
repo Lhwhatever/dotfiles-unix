@@ -2,8 +2,6 @@ require('icons')
 local langs = require('lang')
 local keymaps = require('keymaps')
 
-local M = {}
-
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
 function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
 	opts = opts or {}
@@ -21,39 +19,27 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagn
 	update_in_insert = true,
 })
 
-local lsp_installer = require('nvim-lsp-installer')
+local mason_lsp = require('mason-lspconfig')
 
-lsp_installer.on_server_ready(function(server)
-	if langs.servers[server.name] == nil then
-		server:setup(langs.common)
-	else
-		server:setup(langs.servers[server.name])
-	end
-end)
+local mason_setup_config = {
+	function(server_name) -- default handler
+		require('lspconfig')[server_name].setup(langs.common)
+	end,
+}
 
-function M.jump_to_preview()
-	if vim.tbl_contains(vim.api.nvim_list_wins(), M.floating_win) then
-		vim.cmd([[normal! m`]])
-		vim.fn.setpos('.', { M.dest.buf, M.dest.line + 1, M.dest.character + 1 })
-		vim.api.nvim.exec_autocmds('CursorMoved')
+vim.diagnostic.config({ severity_sort = true })
+
+mason_lsp.setup()
+
+for server_name, config in pairs(langs.servers) do
+	if config.override ~= false then
+		mason_setup_config[server_name] = function()
+			require('lspconfig')[server_name].setup(config)
+		end
 	else
-		vim.cmd([[normal! <CR>]])
+		mason_setup_config[server_name] = config.setup
 	end
 end
 
-keymaps.map({
-	{ 'n', '<CR>', [[<cmd>lua require 'lsp'.jump_to_preview()<CR>]] },
-}, { noremap = true, silent = true })
-
-local lspconfig = require('lspconfig')
-local configs = require('lspconfig/configs')
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-lspconfig.emmet_ls.setup({
-	-- on_attach = on_attach,
-	capabilities = capabilities,
-	filetypes = { 'html', 'css', 'typescriptreact', 'javascriptreact' },
-})
-
-return M
+mason_lsp.setup()
+mason_lsp.setup_handlers(mason_setup_config)

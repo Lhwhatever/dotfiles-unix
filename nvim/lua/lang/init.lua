@@ -5,7 +5,9 @@ local M = {
 
 local langs = {
 	require('lang.lua'),
-	require('lang.typescript'),
+	require('lang.ts'),
+	require('lang.emmet'),
+	require('lang.clangd'),
 }
 
 for _, module in ipairs(langs) do
@@ -16,7 +18,6 @@ for _, module in ipairs(langs) do
 			end
 		end
 		M.servers[module.lsp.key] = module.lsp
-		M.servers.key = nil
 	end
 end
 
