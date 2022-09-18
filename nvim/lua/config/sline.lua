@@ -466,7 +466,7 @@ local StatusLines = {
 			Terminal = colors.blue,
 		},
 	},
-	init = utils.pick_child_on_condition,
+	fallthrough = false,
 	SpecialStatusLine,
 	TerminalStatusLine,
 	InactiveStatusLine,
