@@ -19,8 +19,7 @@ null.setup({
 				buffer = bufnr,
 				desc = 'Format on save',
 				callback = function()
-					local params = require('vim.lsp.util').make_formatting_params({})
-					client.request('textDocument/formatting', params, nil, bufnr)
+					vim.lsp.buf.formatting_sync()
 				end,
 			})
 		end
