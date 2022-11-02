@@ -5,7 +5,7 @@ M.on_attach = function(client, bufnr)
 		vim.keymap.set(mode, lhs, rhs, { silent = true, buffer = bufnr })
 	end
 
-	client.resolved_capabilities.document_formatting = false
+	client.server_capabilities.documentFormattingProvider = false
 
 	mapkey('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
 	mapkey('n', 'gd', [[<cmd>TroubleToggle lsp_definitions<CR>]])
@@ -28,10 +28,9 @@ M.flags = {
 	debounce_text_changes = 150,
 }
 
-M.make_capabilites = function ()
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-    return capabilities
+M.make_capabilites = function()
+	local capabilities = require('cmp_nvim_lsp').default_capabilities()
+	return capabilities
 end
 
 M.capabilities = M.make_capabilites()

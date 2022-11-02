@@ -7,8 +7,8 @@ M.lsp = {
 	override = true,
 	on_attach = function(client, bufnr)
 		common.on_attach(client, bufnr)
-		client.resolved_capabilities.document_formatting = false
-		client.resolved_capabilities.document_range_formatting = false
+		client.server_capabilities.documentFormattingProvider = false
+		client.server_capabilities.documentRangeFormattingProvider = false
 
 		local opts = { silent = true, buffer = bufnr }
 		local ts = require('typescript')

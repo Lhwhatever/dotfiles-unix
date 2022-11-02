@@ -41,5 +41,4 @@ for server_name, config in pairs(langs.servers) do
 	end
 end
 
-mason_lsp.setup()
 mason_lsp.setup_handlers(mason_setup_config)
