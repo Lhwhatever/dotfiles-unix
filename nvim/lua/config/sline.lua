@@ -473,4 +473,6 @@ local StatusLines = {
 	ActiveStatusLine,
 }
 
-require('heirline').setup(StatusLines)
+require('heirline').setup({
+	statusline = StatusLines,
+})

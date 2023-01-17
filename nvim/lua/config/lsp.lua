@@ -1,6 +1,5 @@
 require('icons')
 local langs = require('lang')
-local keymaps = require('keymaps')
 
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
 function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
