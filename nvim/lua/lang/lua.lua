@@ -1,7 +1,7 @@
 local M = {}
 
 M.lsp = {
-	key = 'sumneko_lua',
+	key = 'lua_ls',
 	settings = {
 		Lua = {
 			runtime = {
